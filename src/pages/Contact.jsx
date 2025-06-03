@@ -57,7 +57,7 @@ const ContactSection = () => {
               speed="1"
               loop
               autoplay
-              className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64"
+               className="w-50 h-40  md:w-66 md:h-56 lg:w-74 lg:h-64 xl:w-90 xl:h-80"
             ></lottie-player>
           </motion.div>
 
