@@ -38,42 +38,49 @@ const Navbar = () => {
       }
       setActiveId(current);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [activeId]);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-transparent text-white z-50 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Logo and Title */}
-        <div onClick={(e) => handleNavClick(e, 'hero')} className="flex items-center gap-2 cursor-pointer">
-         
+    <nav className="fixed w-full bg-transparent text-white z-50">
+      <div className="container mx-auto px-4 sm:px-5 md:px-6 lg:px-8 flex items-center justify-between h-16">
+        {/* Logo + Brand */}
+        <div
+          onClick={(e) => handleNavClick(e, 'hero')}
+          className="flex items-center gap-1 sm:gap-2 cursor-pointer"
+        >
+          <img
+            src={vr}
+            alt="Logo"
+            className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
+          />
           <motion.span
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             whileHover={{ scale: 1.05 }}
-            className="text-xl sm:text-2xl font-extrabold text-cyan-500 dark:text-cyan-400"
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400 hover:text-gray-700 dark:hover:text-white transition"
           >
             CodeNova
           </motion.span>
         </div>
 
-        {/* Desktop Nav */}
-        <ul className="hidden md:flex gap-6 items-center">
+        {/* Desktop Links */}
+        <ul className="hidden md:flex space-x-4 lg:space-x-8">
           {navLinks.map(({ id, label }) => (
             <li key={id} className="relative group">
               <a
                 href={`#${id}`}
                 onClick={(e) => handleNavClick(e, id)}
-                className={`transition-colors font-medium duration-300 ${
+                className={`relative transition-colors duration-300 ${
                   activeId === id
-                    ? 'text-cyan-500 dark:text-cyan-400'
-                    : 'text-white hover:text-cyan-400'
-                }`}
+                    ? 'text-cyan-600 dark:text-cyan-400'
+                    : 'text-gray-700 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400'
+                } text-sm sm:text-base lg:text-lg`}
               >
                 {label}
+                {/* Animated underline */}
                 <span
                   className={`absolute left-0 -bottom-1 h-[2px] bg-cyan-300 transition-all duration-300 transform ${
                     activeId === id ? 'w-full' : 'w-0 group-hover:w-full'
@@ -84,14 +91,15 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Hamburger Icon */}
+        {/* Hamburger Button (Mobile) */}
         <button
           className="md:hidden flex flex-col justify-center items-center w-8 h-8"
           onClick={toggleMenu}
           aria-label="Toggle menu"
+          aria-expanded={isOpen}
         >
           <motion.span
-            className="block w-6 h-0.5 bg-white rounded-sm mb-1"
+            className="block w-6 h-0.5 bg-white rounded-sm origin-left mb-1"
             animate={isOpen ? { rotate: 45, x: 2, y: 6 } : { rotate: 0, x: 0, y: 0 }}
             transition={{ duration: 0.3 }}
           />
@@ -101,7 +109,7 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
           />
           <motion.span
-            className="block w-6 h-0.5 bg-white rounded-sm"
+            className="block w-6 h-0.5 bg-white rounded-sm origin-left"
             animate={isOpen ? { rotate: -45, x: 2, y: -6 } : { rotate: 0, x: 0, y: 0 }}
             transition={{ duration: 0.3 }}
           />
@@ -113,17 +121,15 @@ const Navbar = () => {
         initial={{ height: 0, opacity: 0 }}
         animate={isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className="md:hidden bg-cyan-700 overflow-hidden rounded-b-lg shadow-lg"
+        className="overflow-hidden md:hidden bg-cyan-700"
       >
         {navLinks.map(({ id, label }) => (
           <li key={id} className="border-b border-cyan-600">
             <a
               href={`#${id}`}
               onClick={(e) => handleNavClick(e, id)}
-              className={`block px-5 py-3 font-medium ${
-                activeId === id
-                  ? 'text-cyan-200 bg-cyan-800'
-                  : 'text-white hover:bg-cyan-600'
+              className={`block px-4 py-3 text-base sm:text-lg transition ${
+                activeId === id ? 'text-cyan-300 underline' : 'text-white hover:bg-cyan-600'
               }`}
             >
               {label}
