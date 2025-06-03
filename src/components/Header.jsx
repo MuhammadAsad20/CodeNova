@@ -59,7 +59,7 @@ const Navbar = () => {
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6 }}
     whileHover={{ scale: 1.05 }}
-    className="text-5xl font-extrabold text-cyan-600 dark:text-cyan-400 hover:text-gray-700 dark:hover:text-white transition"
+    className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-cyan-600 dark:text-cyan-400 hover:text-gray-700 dark:hover:text-white transition"
   >
     CodeNova
   </motion.span>
