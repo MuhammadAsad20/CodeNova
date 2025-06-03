@@ -1,18 +1,18 @@
-// components/AboutSection.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 
 const AboutSection = () => {
   return (
     <section id="about" className="py-20 bg-[#F8F9FB] dark:bg-gray-900">
-      <div className="container mx-auto px-4 sm:px-5 md:px-6 lg:px-8 flex flex-col md:flex-row items-center">
-        {/* Lottie on Left (or top on mobile) */}
+      <div className="container mx-auto px-4 sm:px-5 md:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
+        {/* Lottie on Left */}
         <motion.div
           className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
+          whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+          whileHover={{ scale: 1.05, rotateY: 5 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.5 }}
         >
           <lottie-player
             src="https://assets2.lottiefiles.com/packages/lf20_pwohahvd.json"
@@ -27,10 +27,11 @@ const AboutSection = () => {
         {/* Text on Right */}
         <motion.div
           className="w-full md:w-1/2 text-center md:text-left"
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
+          whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+          whileHover={{ scale: 1.05, rotateY: -5 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.5 }}
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-600 dark:text-cyan-400 mb-4">
             About Us

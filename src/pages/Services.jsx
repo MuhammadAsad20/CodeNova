@@ -53,14 +53,14 @@ const ServicesSection = () => {
                   speed="1"
                   loop
                   autoplay
-                  className="w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-44 lg:h-44"
+                  className="w-50 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-44 lg:h-44"
                 ></lottie-player>
               ) : (
                 <Player
                   autoplay
                   loop
                   src={srv.iconData}
-                  className="w-50 h-32 md:w-60 md:h-40 lg:w-70 lg:h-44"
+                  className="w-32 h-32 sm:w-36 sm:h-36 md:w-60 md:h-40 lg:w-70   lg:h-44"
                 />
               )}
 

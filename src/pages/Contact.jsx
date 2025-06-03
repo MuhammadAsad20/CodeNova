@@ -2,6 +2,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
+const fadeScaleVariant = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } },
+};
+
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -29,9 +34,10 @@ const ContactSection = () => {
       <div className="container mx-auto px-4 sm:px-5 md:px-6 lg:px-8 max-w-6xl">
         <motion.h2
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-cyan-600 dark:text-cyan-400 mb-10 text-center"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={fadeScaleVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.5 }}  // repeat animation on every view
         >
           Contact Us
         </motion.h2>
@@ -39,10 +45,11 @@ const ContactSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Lottie Animation */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
             className="w-full flex justify-center"
+            variants={fadeScaleVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.5 }}  // repeat animation
           >
             <lottie-player
               src="https://assets10.lottiefiles.com/packages/lf20_tfb3estd.json"
@@ -56,9 +63,10 @@ const ContactSection = () => {
 
           {/* Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            variants={fadeScaleVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.5 }}  // repeat animation
           >
             {submitted ? (
               <div className="text-center text-cyan-700 dark:text-cyan-300 font-semibold text-lg sm:text-xl">

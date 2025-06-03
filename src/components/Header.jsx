@@ -1,4 +1,3 @@
-// components/Navbar.jsx
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import vr from '../../public/vr.png';
@@ -21,8 +20,11 @@ const Navbar = () => {
     e.preventDefault();
     const elem = document.getElementById(id);
     if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
-      closeMenu();
+      elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Delay menu close to allow scroll animation to start
+      setTimeout(() => {
+        closeMenu();
+      }, 300);
     }
   };
 
@@ -44,23 +46,23 @@ const Navbar = () => {
 
   return (
     <nav className="fixed w-full bg-transparent text-white z-50">
-      <div className="container mx-auto px-4 sm:px-5 md:px-6 lg:px-8 flex items-center justify-between h-16">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo + Brand */}
         <div
           onClick={(e) => handleNavClick(e, 'hero')}
-          className="flex items-center gap-1 sm:gap-2 cursor-pointer"
+          className="flex items-center gap-1 cursor-pointer"
         >
           <img
             src={vr}
             alt="Logo"
-            className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
+            className="w-6 h-6 md:w-10 md:h-10"
           />
           <motion.span
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             whileHover={{ scale: 1.05 }}
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400 hover:text-gray-700 dark:hover:text-white transition"
+            className="text-lg md:text-2xl lg:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400 hover:text-gray-700 dark:hover:text-white transition"
           >
             CodeNova
           </motion.span>
@@ -77,7 +79,7 @@ const Navbar = () => {
                   activeId === id
                     ? 'text-cyan-600 dark:text-cyan-400'
                     : 'text-gray-700 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400'
-                } text-sm sm:text-base lg:text-lg`}
+                } text-sm  lg:text-lg`}
               >
                 {label}
                 {/* Animated underline */}
@@ -92,43 +94,38 @@ const Navbar = () => {
         </ul>
 
         {/* Hamburger Button (Mobile) */}
-        <button
-          className="md:hidden flex flex-col justify-center items-center w-8 h-8"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-          aria-expanded={isOpen}
-        >
-          <motion.span
-            className="block w-6 h-0.5 bg-white rounded-sm origin-left mb-1"
-            animate={isOpen ? { rotate: 45, x: 2, y: 6 } : { rotate: 0, x: 0, y: 0 }}
-            transition={{ duration: 0.3 }}
-          />
-          <motion.span
-            className="block w-6 h-0.5 bg-white rounded-sm mb-1"
-            animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          />
-          <motion.span
-            className="block w-6 h-0.5 bg-white rounded-sm origin-left"
-            animate={isOpen ? { rotate: -45, x: 2, y: -6 } : { rotate: 0, x: 0, y: 0 }}
-            transition={{ duration: 0.3 }}
-          />
-        </button>
+        {/* Hamburger Button (Mobile) */}
+<button
+  className="md:hidden flex justify-center items-center w-8 h-8 text-xl"
+  onClick={toggleMenu}
+  aria-label="Toggle menu"
+  aria-expanded={isOpen}
+>
+  <motion.i
+    key={isOpen ? 'close' : 'open'}
+    className={`fas ${isOpen ? 'fa-xmark' : 'fa-bars'} text-black dark:text-white`}
+    initial={{ rotate: -90, opacity: 0 }}
+    animate={{ rotate: 0, opacity: 1 }}
+    exit={{ rotate: 90, opacity: 0 }}
+    transition={{ duration: 0.3 }}
+  />
+</button>
+
       </div>
 
       {/* Mobile Menu */}
       <motion.ul
-        initial={{ height: 0, opacity: 0 }}
-        animate={isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
-        transition={{ duration: 0.3 }}
-        className="overflow-hidden md:hidden bg-cyan-700"
+        initial={{ maxHeight: 0, opacity: 0 }}
+        animate={isOpen ? { maxHeight: 300, opacity: 1 } : { maxHeight: 0, opacity: 0 }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className="overflow-hidden md:hidden bg-cyan-700 w-full"
       >
         {navLinks.map(({ id, label }) => (
           <li key={id} className="border-b border-cyan-600">
             <a
               href={`#${id}`}
               onClick={(e) => handleNavClick(e, id)}
-              className={`block px-4 py-3 text-base sm:text-lg transition ${
+              className={`block px-4 py-3 text-base transition ${
                 activeId === id ? 'text-cyan-300 underline' : 'text-white hover:bg-cyan-600'
               }`}
             >
