@@ -48,7 +48,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo and Title */}
         <div onClick={(e) => handleNavClick(e, 'hero')} className="flex items-center gap-2 cursor-pointer">
-          <img src={vr} alt="logo" className="w-10 h-10 object-contain" />
+         
           <motion.span
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
