@@ -12,16 +12,27 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeId, setActiveId] = useState('hero');
+  const [darkMode, setDarkMode] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
+
+  const toggleTheme = () => {
+    const html = document.documentElement;
+    if (html.classList.contains('dark')) {
+      html.classList.remove('dark');
+      setDarkMode(false);
+    } else {
+      html.classList.add('dark');
+      setDarkMode(true);
+    }
+  };
 
   const handleNavClick = (e, id) => {
     e.preventDefault();
     const elem = document.getElementById(id);
     if (elem) {
       elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Delay menu close to allow scroll animation to start
       setTimeout(() => {
         closeMenu();
       }, 300);
@@ -47,9 +58,13 @@ const Navbar = () => {
   return (
     <nav className="fixed w-full bg-transparent text-white z-50">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-16">
-        {/* Logo + Brand */}
+
+        {/* Logo + Brand with Theme Toggle on Image Click */}
         <div
-          onClick={(e) => handleNavClick(e, 'hero')}
+          onClick={(e) => {
+            handleNavClick(e, 'hero');
+            toggleTheme();
+          }}
           className="flex items-center gap-1 cursor-pointer"
         >
           <img
@@ -82,7 +97,6 @@ const Navbar = () => {
                 } text-sm  lg:text-lg`}
               >
                 {label}
-                {/* Animated underline */}
                 <span
                   className={`absolute left-0 -bottom-1 h-[2px] bg-cyan-300 transition-all duration-300 transform ${
                     activeId === id ? 'w-full' : 'w-0 group-hover:w-full'
@@ -94,23 +108,21 @@ const Navbar = () => {
         </ul>
 
         {/* Hamburger Button (Mobile) */}
-        {/* Hamburger Button (Mobile) */}
-<button
-  className="md:hidden flex justify-center items-center w-8 h-8 text-xl"
-  onClick={toggleMenu}
-  aria-label="Toggle menu"
-  aria-expanded={isOpen}
->
-  <motion.i
-    key={isOpen ? 'close' : 'open'}
-    className={`fas ${isOpen ? 'fa-xmark' : 'fa-bars'} text-black dark:text-white`}
-    initial={{ rotate: -90, opacity: 0 }}
-    animate={{ rotate: 0, opacity: 1 }}
-    exit={{ rotate: 90, opacity: 0 }}
-    transition={{ duration: 0.3 }}
-  />
-</button>
-
+        <button
+          className="md:hidden flex justify-center items-center w-8 h-8 text-xl"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+          aria-expanded={isOpen}
+        >
+          <motion.i
+            key={isOpen ? 'close' : 'open'}
+            className={`fas ${isOpen ? 'fa-xmark' : 'fa-bars'} text-black dark:text-white`}
+            initial={{ rotate: -90, opacity: 0 }}
+            animate={{ rotate: 0, opacity: 1 }}
+            exit={{ rotate: 90, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          />
+        </button>
       </div>
 
       {/* Mobile Menu */}
