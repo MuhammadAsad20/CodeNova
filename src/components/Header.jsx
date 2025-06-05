@@ -96,7 +96,7 @@ const Navbar = () => {
                 className={`relative transition-colors duration-300 ${
                   activeId === id
                     ? 'text-cyan-600 dark:text-cyan-400'
-                    : 'text-gray-700 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400'
+                    : 'text-gray-800 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400'
                 } text-sm  lg:text-lg`}
               >
                 {label}
