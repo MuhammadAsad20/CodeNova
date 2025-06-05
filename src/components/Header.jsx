@@ -61,16 +61,16 @@ const Navbar = () => {
 
         {/* Logo + Brand with Theme Toggle on Image Click */}
         <div
-          onClick={(e) => {
-            handleNavClick(e, 'hero');
-            toggleTheme();
-          }}
+          
           className="flex items-center gap-1 cursor-pointer"
         >
           <img
             src={vr}
             alt="Logo"
             className="w-6 h-6 md:w-10 md:h-10"
+            onClick={(e) => {
+            toggleTheme();
+          }}
           />
           <motion.span
             initial={{ opacity: 0, y: -10 }}
@@ -78,7 +78,10 @@ const Navbar = () => {
             transition={{ duration: 0.6 }}
             whileHover={{ scale: 1.05 }}
             className="text-lg md:text-2xl lg:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400 hover:text-gray-700 dark:hover:text-white transition"
-          >
+          onClick={(e) => {
+            handleNavClick(e, 'hero');
+          }}
+            >
             CodeNova
           </motion.span>
         </div>
