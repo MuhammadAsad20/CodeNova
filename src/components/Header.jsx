@@ -56,7 +56,7 @@ const Navbar = () => {
   }, [activeId]);
 
   return (
-    <nav className="fixed w-full backdrop-blur-md bg-white/50 dark:bg-black/50 text-white z-50 border-b border-white/10 dark:border-white/10 shadow-sm">
+    <nav className="fixed w-full backdrop-blur-md bg-white/40 dark:bg-black/40 text-white z-50 border-b border-white/10 dark:border-white/10 shadow-sm">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between h-16">
 
         {/* Logo + Brand with Theme Toggle on Image Click */}
